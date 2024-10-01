@@ -8,7 +8,6 @@ import lombok.Setter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
 import java.util.Properties;
@@ -38,8 +37,8 @@ public class CustomDataSource implements DataSource {
                 prop.load(CustomDataSource.class.getClassLoader().getResourceAsStream("app.properties"));
                 instance = new CustomDataSource(
                         prop.getProperty("postgress.driver"),
-                        prop.getProperty("postgres.password"),
                         prop.getProperty("postgres.url"),
+                        prop.getProperty("postgres.password"),
                         prop.getProperty("postgres.name")
 
                 );
