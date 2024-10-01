@@ -20,12 +20,13 @@ public class JDBCtest {
         JDBCtest jdbctest = new JDBCtest();
         jdbctest.initConnection();
 
-        User user = new User(1L, "user", "usersurname", 2);
+        User user = new User(null , "user", "usersurname", 2);
         SimpleJDBCRepository repo = new SimpleJDBCRepository();
 
+        Long userID = repo.createUser(user);
         repo.deleteUser(1L);
+        user = repo.findUserById(userID);
         user.setAge(10);
-        repo.createUser(user);
 
         repo.updateUser(user);
 

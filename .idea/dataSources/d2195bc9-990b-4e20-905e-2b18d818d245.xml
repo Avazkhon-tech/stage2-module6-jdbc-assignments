@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.52">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <IntrospectionStateNumber>12455</IntrospectionStateNumber>
+      <IntrospectionStateNumber>12478</IntrospectionStateNumber>
       <ServerVersion>16.3</ServerVersion>
       <StartupTime>1727780119</StartupTime>
       <TimeZones>true ACDT
@@ -868,7 +868,7 @@ false Zulu
 13474||10|C|G
 13474||-9223372036854775808|U|G
 13474||10|U|G</Grants>
-      <IntrospectionStateNumber>12455</IntrospectionStateNumber>
+      <IntrospectionStateNumber>12478</IntrospectionStateNumber>
       <ObjectId>41418</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4307,60 +4307,71 @@ false Zulu
     <schema id="284" parent="19" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>12455</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2024-10-01.11:09:13</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>12478</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2024-10-01.11:27:25</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>523</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
-    <table id="285" parent="284" name="myusers">
-      <ObjectId>41431</ObjectId>
-      <StateNumber>12454</StateNumber>
+    <sequence id="285" parent="284" name="myusers_id_seq">
+      <DasType>integer|0s</DasType>
+      <ObjectId>41436</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>12477</StateNumber>
+      <OwnerName>avazkhon</OwnerName>
+    </sequence>
+    <table id="286" parent="284" name="myusers">
+      <ObjectId>41437</ObjectId>
+      <StateNumber>12477</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>avazkhon</OwnerName>
     </table>
-    <column id="286" parent="285" name="id">
+    <column id="287" parent="286" name="id">
       <DasType>integer|0s</DasType>
+      <DefaultExpression>nextval(&apos;myusers_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>12454</StateNumber>
+      <StateNumber>12477</StateNumber>
+      <SequenceId>41436</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="287" parent="285" name="firstname">
+    <column id="288" parent="286" name="firstname">
       <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>12454</StateNumber>
+      <StateNumber>12477</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="288" parent="285" name="lastname">
+    <column id="289" parent="286" name="lastname">
       <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>12454</StateNumber>
+      <StateNumber>12477</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="289" parent="285" name="age">
+    <column id="290" parent="286" name="age">
       <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>12454</StateNumber>
+      <StateNumber>12477</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="290" parent="285" name="myusers_pkey">
+    <index id="291" parent="286" name="myusers_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>41434</ObjectId>
+      <ObjectId>41441</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>12454</StateNumber>
+      <StateNumber>12477</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="291" parent="285" name="myusers_pkey">
+    <key id="292" parent="286" name="myusers_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>41435</ObjectId>
+      <ObjectId>41442</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>12454</StateNumber>
-      <UnderlyingIndexId>41434</UnderlyingIndexId>
+      <StateNumber>12477</StateNumber>
+      <UnderlyingIndexId>41441</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>
