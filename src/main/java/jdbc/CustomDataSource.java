@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -27,22 +28,24 @@ public class CustomDataSource implements DataSource {
         this.url = url;
         this.name = name;
         this.password = password;
-        try {
-            Class.forName(driver);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
 
     }
 
     public static CustomDataSource getInstance() {
-
         if (instance == null) {
+            Properties prop = new Properties();
+            try {
+                prop.load(CustomDataSource.class.getClassLoader().getResourceAsStream("app.properties"));
                 instance = new CustomDataSource(
-                        "org.postgresql.Driver",
-                        "jdbc:postgresql://localhost:5432/myfirstdb",
-                        "",
-                        "");
+                        prop.getProperty("postgress.driver"),
+                        prop.getProperty("postgres.password"),
+                        prop.getProperty("postgres.url"),
+                        prop.getProperty("postgres.name")
+
+                );
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         return instance;
 
@@ -50,12 +53,12 @@ public class CustomDataSource implements DataSource {
 
     @Override
     public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(url);
+        return new CustomConnector().getConnection(url);
     }
 
     @Override
     public Connection getConnection(String username, String password) throws SQLException {
-        return DriverManager.getConnection(url, username, password);
+        return new CustomConnector().getConnection(url, username, password);
     }
 
     @Override

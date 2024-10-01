@@ -27,18 +27,19 @@ public class SimpleJDBCRepository {
     private static final String findUserByNameSQL = "select * from myusers where firstname = ?";
     private static final String findAllUserSQL = "select * from myusers";
 
-    public Long createUser(Integer id, String firstname, String lastname, int age) {
+    public Long createUser(User user) {
+        Long id = null;
         try {
             connection = CustomDataSource.getInstance().getConnection();
             ps = connection.prepareStatement(createUserSQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, id);
-            ps.setString(2, firstname);
-            ps.setString(3, lastname);
-            ps.setInt(4, age);
+            ps.setLong(1, user.getId());
+            ps.setString(2, user.getFirstName());
+            ps.setString(3, user.getFirstName());
+            ps.setInt(4, user.getAge());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                return rs.getLong(1);
+                id =  rs.getLong(1);
             }
 
         } catch (SQLException e) {
@@ -46,7 +47,7 @@ public class SimpleJDBCRepository {
         } finally {
             closeResources();
         }
-        return null;
+        return id;
     }
 
     public User findUserById(Long userId) {
@@ -114,14 +115,14 @@ public class SimpleJDBCRepository {
         return users;
     }
 
-    public User updateUser(Long id, String firstname, String lastname, int age) {
+    public User updateUser(User user) {
         try {
             connection = CustomDataSource.getInstance().getConnection();
             ps = connection.prepareStatement(updateUserSQL);
-            ps.setLong(1, id);
-            ps.setString(2, firstname);
-            ps.setString(3, lastname);
-            ps.setInt(4, age);
+            ps.setLong(1, user.getId());
+            ps.setString(2, user.getFirstName());
+            ps.setString(3, user.getFirstName());
+            ps.setInt(4, user.getAge());
             ps.executeUpdate();
 
         } catch (SQLException e) {
