@@ -34,7 +34,7 @@ public class SimpleJDBCRepository {
             ps = connection.prepareStatement(createUserSQL, Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, user.getId());
             ps.setString(2, user.getFirstName());
-            ps.setString(3, user.getFirstName());
+            ps.setString(3, user.getLastName());
             ps.setInt(4, user.getAge());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -119,10 +119,10 @@ public class SimpleJDBCRepository {
         try {
             connection = CustomDataSource.getInstance().getConnection();
             ps = connection.prepareStatement(updateUserSQL);
-            ps.setLong(1, user.getId());
-            ps.setString(2, user.getFirstName());
-            ps.setString(3, user.getFirstName());
-            ps.setInt(4, user.getAge());
+            ps.setString(1, user.getFirstName());
+            ps.setString(2, user.getLastName());
+            ps.setLong(3, user.getAge());
+            ps.setLong(4, user.getId());
             ps.executeUpdate();
 
         } catch (SQLException e) {
